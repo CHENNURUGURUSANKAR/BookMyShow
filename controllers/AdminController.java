@@ -1,4 +1,4 @@
-package com.scaler.lld.bookmyshow.controllers;
+package com.guru149.bookmyshow.controllers;
 
 public class AdminController {
     

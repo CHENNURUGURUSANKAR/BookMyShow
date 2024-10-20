@@ -1,4 +1,4 @@
-package com.scaler.lld.bookmyshow.services.password;
+package com.guru149.bookmyshow.services.password;
 
 import org.springframework.stereotype.Service;
 

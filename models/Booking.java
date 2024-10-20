@@ -1,32 +1,35 @@
 package com.guru149.bookmyshow.models;
 
-import com.guru149.bookmyshow.enums.BookingStatus;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
 @Entity
-public class Booking extends BaseModel{
-   @ManyToOne
-    private User user;
-   @ManyToOne
+@Table(name = "BOOKINGS")
+public class Booking extends Auditable {
+    
+    @ManyToOne
+    private Customer customer;
+    
+    @ManyToOne
     private Show show;
-   @ManyToMany
-    private List<ShowSeat> seats=new ArrayList<>();
-    private double price;
-    private Date bookedAt;
-
-    @Enumerated
-
     private BookingStatus status;
-    @OneToMany
-    private List<Payment> payments=new ArrayList<>();
+
+    @OneToMany(mappedBy = "booking")
+    List<ShowSeat> seatsBooked = new ArrayList<>();
+
+    public Booking(Customer customer, Show show) {
+        this.customer = customer;
+        this.show = show;
+        this.status = BookingStatus.PAYMENT_PENDING;
+    }
 }

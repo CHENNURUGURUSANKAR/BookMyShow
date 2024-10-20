@@ -1,4 +1,4 @@
-package com.scaler.lld.bookmyshow.repositories.interfaces;
+package com.guru149.bookmyshow.repositories.interfaces;
 
 import com.scaler.lld.bookmyshow.models.Cinema;
 

@@ -1,4 +1,4 @@
-package com.scaler.lld.bookmyshow.models;
+package com.guru149.bookmyshow.models;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;

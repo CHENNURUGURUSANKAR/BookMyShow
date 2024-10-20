@@ -1,29 +1,25 @@
 package com.guru149.bookmyshow.models;
 
-import com.guru149.bookmyshow.enums.Genre;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-public class Movie extends BaseModel {
+@Table(name = "MOVIES")
+public class Movie extends Auditable {
+
     private String name;
-    @ElementCollection
-    @Enumerated
-    private List<String> languages = new ArrayList<>();
-    private Float rating;
-    @ElementCollection
-    @Enumerated
-    private List<Genre> genres;
+    private Integer durationMinutes;
+    
+    @OneToMany(mappedBy = "movie")
+    private List<Show> shows = new ArrayList<>();
 
 }

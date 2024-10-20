@@ -1,24 +1,26 @@
 package com.guru149.bookmyshow.models;
 
-import com.guru149.bookmyshow.enums.SeatStatus;
-import com.guru149.bookmyshow.enums.SeatType;
-import jakarta.persistence.*;
-import jdk.jfr.Enabled;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
 @Entity
-public class ShowSeat extends BaseModel {
+@Table(name = "SHOW_SEATS")
+public class ShowSeat extends Auditable {
+    
+    @ManyToOne
+    private HallSeat hallSeat;
+
     @ManyToOne
     private Show show;
+    
     @ManyToOne
-    private Seat seat;
-    @Enumerated
-    private SeatStatus seatStatus;
+    private Booking booking;
+    private boolean occupied;
+    
 }

@@ -1,4 +1,4 @@
-package com.scaler.lld.bookmyshow.dtos;
+package com.guru149.bookmyshow.dtos;
 
 import java.util.List;
 

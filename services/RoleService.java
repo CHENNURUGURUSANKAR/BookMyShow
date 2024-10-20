@@ -1,4 +1,4 @@
-package com.scaler.lld.bookmyshow.services;
+package com.guru149.bookmyshow.services;
 
 import com.scaler.lld.bookmyshow.models.Role;
 import com.scaler.lld.bookmyshow.repositories.interfaces.RoleRepository;

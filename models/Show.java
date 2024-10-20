@@ -1,29 +1,41 @@
 package com.guru149.bookmyshow.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
 @Entity
-@Table(name = "shows")
-public class Show extends BaseModel {
-    private Long screenId;
+@Table(name = "SHOWS")
+public class Show extends Auditable {
+
+    private Date startTime; // include Timezone
+    private Date endTime;
+
     @ManyToOne
     private Movie movie;
-    private LocalDateTime showTime;
-    @OneToMany
-    private List<ShowSeat> seats = new ArrayList<>();
+
+    @ManyToOne
+    private CinemaHall cinemaHall;
+    private boolean cancelled;
+
+    @OneToMany(mappedBy = "show")
+    private List<Booking> bookings = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "show")
+    private List<ShowSeat> showSeats = new ArrayList<>();
+
+    public boolean isShowPending() {
+        return !cancelled && endTime.after(new Date());
+    }
 
 }
